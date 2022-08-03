@@ -1,44 +1,38 @@
+from Room_class import Room
 class Hotel:
     
-    def __init__(self, hotelName = '', hotelAddress = '', ):
+    
+    def __init__(self, hotelName = '', hotelAddress = ''  ):
         self.hotelName = hotelName
         self.hotelAddress = hotelAddress
-        
-    def process_checkin():
-        pass
-    
-    def process_checkout():
-        pass
-    
-    def issue_invoices():
-        pass
-    
-    def display_rooms():
-        pass
-    
-    def verify_availability():
-        pass
-    
+        self.rooms = {}  
+        self.roomNoAndGuest = {}
+        self.roomAvailability = {'Available':[],
+                                 'UnAvailable' :[]}
     
 
-class Room:
-    
-    roomPrices = {'Single' : {'Standard': 40 ,
-                               'Deluxe' : 60}, 
-                  'Double': {'Standard' : 80,
-                             'Deluxe'   : 100}, 
-                  'Suite' : {'Standard' : 100,
-                             'Deluxe'   : 120}
-                  }
-    
-    def __init__(self , roomNO , roomType , roomFeature):
-        self.roomNo = roomNO
-        self.roomType = roomType   # double, single ,suite
-        self.feature = roomFeature  # standard , Deluxe
-                
+    def addRoom(self, room :Room):
+        self.rooms[room.roomNo] = room
+        self.roomAvailability['Available'].append(room.roomNo)
         
-if __name__ == '__main__':
-    guest1 =  Guest(1234,'name', '10/09/1999', 25864789)
-    guest1.print_name_DOB()  
-    vip1 = VIP(123, 'name', 'asd', 123467)
-    print(vip1.guestType)
+    def addRooms(self, roomType, roomFeature, maxLenghtofStay, noOfRoomsToAdd):
+        
+        for i in range(noOfRoomsToAdd):
+            room = Room(roomType, roomFeature, maxLenghtofStay)
+            self.addRoom(room)             
+        
+        
+    def process_checkin(self):
+        pass
+    
+    def process_checkout(self):
+        pass
+    
+    def issue_invoices(self):
+        pass
+    
+    def display_rooms(self, numberOfPeople =None, lengthOfStay = None, withView = 'no'  ):
+        pass
+    
+    def verify_availability(self):
+        pass
