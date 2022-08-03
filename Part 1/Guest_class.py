@@ -1,16 +1,20 @@
 class Guest:
-   # GuestUniqueID = 0
-    def __init__ (self , ID , name , DOB , phoneNumber  ):
-        self.id = ID
-        self.booking = 0
+    GuestUniqueID_counter = 0
+    guestPresent = set()
+    def __init__ (self ,name , DOB , phoneNumber  ):
+        self.booking = None
         self.name=  name
         self.DOB = DOB
-        #self.guestUniqueID = Guest.GuestUniqueID+1
-        #Guest.GuestUniqueID
-
+        self.ID = Guest.GuestUniqueID_counter+1
+        Guest.GuestUniqueID_counter  = Guest.GuestUniqueID_counter+1
+        Guest.guestPreset.add(self.ID)
         
-    def check_in(self,roomNo):
+    
+    def check_in(self,roomNo, bookingdays):
         self.booking = roomNo
+        self.bookingdays= bookingdays
+        
+        
     
     def enquireRoom(self, hotel):
         pass     
@@ -26,6 +30,7 @@ class Guest:
         print(f'hello {self.name} with dob {self.DOB}')
         print(self.booking)
         print(self.id)
+
 
 class VIP(Guest): 
     guestType= 'VIP'
