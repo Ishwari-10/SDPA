@@ -1,12 +1,17 @@
+# importing all the required classes
 from  Room_class import Room
 from Hotel_class import Hotel
 from Guest_class import Guest
 from Guest_class import VIP
+
+# importing the required package
 import datetime
 
-
+# initialising the required variables
 hotelName='Hotel Regency'
 hotelAddress = 'Britol City Center'
+
+# initialising the number of rooms
 singleStandard= 5
 singleDeluxe = 5
 
@@ -31,27 +36,29 @@ if __name__ == '__main__':
 
     print('Initializing Hotel')
     
+    # instantiating Hotel object
     hotelRegency = Hotel(hotelName=hotelName, hotelAddress= hotelAddress)
     
     
     print('adding Rooms')
-    # single standard
+    # Adding single rooms
     hotelRegency.add_Rooms('Single', 'Standard', maxLengthOfStay['Single']['Standard'], singleStandard)
     hotelRegency.add_Rooms('Single', 'Deluxe', maxLengthOfStay['Single']['Deluxe'], singleStandard)
     
+   # Adding double rooms
     hotelRegency.add_Rooms('Double', 'Standard', maxLengthOfStay['Double']['Standard'], doubleStandard)
     hotelRegency.add_Rooms('Double', 'Deluxe', maxLengthOfStay['Double']['Deluxe'], doubleDeluxe)
     
+    # Adding suite rooms
     hotelRegency.add_Rooms('Suite', 'Standard', maxLengthOfStay['Suite']['Standard'], suiteStandard)
     hotelRegency.add_Rooms('Suite', 'Deluxe', maxLengthOfStay['Suite']['Deluxe'], suiteDeluxe)
    
-    #print(hotelRegency.roomAvailability)
     
-    #print(hotelRegency.rooms)
     
     
     print(hotelRegency.hotelName, ' is open for Guests')
 
+    # creating an infinite loop to get the user input until the conditions are met
     while True:
         print("\n")
         # No need to  save guest if guest doesn't checkin
@@ -61,7 +68,7 @@ if __name__ == '__main__':
         print("\n")
         print("Please select Available Options")
         
-        
+        # printing the menu to user and defining options users can enter to interact with the hotel management system
         option1 =None
         
         while option1 is None:
@@ -69,12 +76,16 @@ if __name__ == '__main__':
                   "2. Check in",
                   "3. Check Out ",sep=("\n"))
             try:
+                # typecasting
                 value =  int(input())
                 if value in [1,2,3]:
                     option1 = value
                 else:
+                    # error handling scenario
+                    # check whether the entered number is correct or not
                     print("Please enter correct option")
             except ValueError:
+                # checking if user is entering int values and not garbage value.
                 print("Please enter a number from the options")
         
        
@@ -91,9 +102,11 @@ if __name__ == '__main__':
                     if enteredNumberOfPeople > 0:
                         numberOfPeople = enteredNumberOfPeople
                     else:
+                         # validation handling scenario
                         print("Entered value cannot be less than 0")                    
                     
                 except ValueError:
+                     # error handling scenario
                     print("Please enter a number")
              
             if numberOfPeople ==0: # Restart loop if 0 entered
@@ -239,6 +252,7 @@ if __name__ == '__main__':
                     
             roomTypeAllowed =  'Single' if numberOfPeople ==1 else 'Double' if numberOfPeople ==2 else 'Suite' if numberOfPeople >2 and numberOfPeople <5 else ''   
             
+            #validation scenario
             if roomTypeAllowed != hotelRegency.rooms[roomNo].roomType:
                 print("The sleected Room doesnt allow the number of People entered for staying.\n")
                 print("Please search for correct Room as per your requirements\n")
