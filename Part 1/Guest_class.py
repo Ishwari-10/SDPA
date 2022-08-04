@@ -1,14 +1,21 @@
 class Guest:
     GuestUniqueID_counter = 0
-    guestPresent = set()
+    #guestPresent = set()
     def __init__ (self ,name , DOB , phoneNumber  ):
         self.booking = None
         self.name=  name
         self.DOB = DOB
+        self.phoneNumber = phoneNumber
         self.ID = Guest.GuestUniqueID_counter+1
         Guest.GuestUniqueID_counter  = Guest.GuestUniqueID_counter+1
-        Guest.guestPreset.add(self.ID)
+        #Guest.guestPresent.add(self.ID)
         
+    
+    def set_guest_details(self,name , DOB , phoneNumber ):
+        self.name=  name
+        self.DOB = DOB
+        self.phoneNumber = phoneNumber
+    
     
     def check_in(self,roomNo, bookingdays):
         self.booking = roomNo
@@ -16,8 +23,8 @@ class Guest:
         
         
     
-    def enquireRoom(self, hotel):
-        pass     
+    def enquire_Room(self, hotel,  numberOfPeople =None, lengthOfStay = None, withView = 'n'  ):        
+        hotel.display_rooms(numberOfPeople,lengthOfStay,withView)
      
     def check_out(self,roomNo):        
         # free room in hotel        
@@ -33,7 +40,10 @@ class Guest:
 
 
 class VIP(Guest): 
-    guestType= 'VIP'
+   # guestType= 'VIP'
+   def __init__ (self ,name , DOB , phoneNumber,vip  ):
+       super().__init__(name, DOB, phoneNumber)
+       self.vip = vip
       
 
     
@@ -41,7 +51,7 @@ class VIP(Guest):
         
         
 if __name__ == '__main__':
-    guest1 =  Guest(1234,'name', '10/09/1999', 25864789)
-    guest1.print_name_DOB()  
-    vip1 = VIP(123, 'name', 'asd', 123467)
-    print(vip1.guestType)
+    guest1 =  VIP('name', '21/02/1991','45454445', 'y')
+   # guest1.print_name_DOB()  
+   
+    print(guest1.phoneNumber)
