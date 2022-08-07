@@ -1,34 +1,22 @@
+
 class Guest:
-     """
+    """
     Guest class which contains definition related to a guest. The methods are also defnied which allows interaction
     with the class members.
     """
-
     # global incrementor
-GuestUniqueID_counter = 0
-    
+    GuestUniqueID_counter = 0
     #guestPresent = set()
-    def __init__ (self ,name , DOB , phoneNumber  ):
 
-        """
-        Guest class constructor, responsible for initialisation of Guest class object
-        Args:
-            name (str): Name of the guest
-            DOB (datetime.date): Date of birth of the guest
-            phoneNumber (int): Phone number of the guest
-        """
-
+    def __init__(self, name, DOB, phoneNumber):
         self.booking = None
-        self.name=  name
+        self.name = name
         self.DOB = DOB
         self.phoneNumber = phoneNumber
         self.ID = Guest.GuestUniqueID_counter+1
-        Guest.GuestUniqueID_counter  = Guest.GuestUniqueID_counter+1
-        #Guest.guestPresent.add(self.ID)
-        
-    
-    def set_guest_details(self,name , DOB , phoneNumber ):
+        Guest.GuestUniqueID_counter = Guest.GuestUniqueID_counter+1
 
+    def set_guest_details(self, name, DOB, phoneNumber):
         """
         Method to set the guest details
         Args:
@@ -38,15 +26,12 @@ GuestUniqueID_counter = 0
         Returns:
             None
         """
-
-        self.name=  name
+        self.name = name
         self.DOB = DOB
         self.phoneNumber = phoneNumber
-    
-    
-    def check_in(self,roomNo, bookingdays):
 
-         """
+    def check_in(self, roomNo, bookingdays):
+        """
         Processing the check in of a guest to the selected room
         Args:
             roomNo (int): Room in which user is going to stay
@@ -54,14 +39,10 @@ GuestUniqueID_counter = 0
         Returns:
             None
         """
-
         self.booking = roomNo
-        self.bookingdays= bookingdays
-        
-        
-    
-    def enquire_Room(self, hotel,  numberOfPeople =None, lengthOfStay = None, withView = 'n'  ):
+        self.bookingdays = bookingdays
 
+    def enquire_Room(self, hotel,  numberOfPeople=None, lengthOfStay=None, withView='n'):
         """
         Enquiring Hotel class for available rooms on the basis of search criteria
         Args:
@@ -74,52 +55,39 @@ GuestUniqueID_counter = 0
         Returns:
             None
         """
+        hotel.display_rooms(numberOfPeople, lengthOfStay, withView)
 
-        hotel.display_rooms(numberOfPeople,lengthOfStay,withView)
-     
-    def check_out(self,roomNo):        
-        # free room in hotel        
+    def check_out(self, hotel):
+        # free room in hotel
+        hotel.process_checkout(self.booking)
+
         self.booking = 0
-    
-    def get_invoice():
-        pass        
-        
-    def print_name_DOB(self): 
 
+    def get_invoice(self, hotel):
+        hotel.issue_invoices(self.booking, self.bookingdays)
+
+    def print_name_DOB(self):
         """
         A method to print the name and date of birth of the user
         Returns:
             None
         """
-
         print(f'hello {self.name} with dob {self.DOB}')
         print(self.booking)
         print(self.id)
 
 
-class VIP(Guest): 
+class VIP(Guest):
+    """
+    Args:
+    name(str):
+    DOB:
+    phoneNumber:
+    vip:
+
+    """
    # guestType= 'VIP'
-   def __init__ (self ,name , DOB , phoneNumber,vip  ):
 
-     """
-
-        Args:
-            name (str):
-            DOB:
-            phoneNumber:
-            vip:
-        """
-        
-       super().__init__(name, DOB, phoneNumber)
-       self.vip = vip
-      
-
-    
-                
-        
-        
-if __name__ == '__main__':
-    guest1 =  VIP('name', '21/02/1991','45454445', 'y')
-   # guest1.print_name_DOB()  
-   
-    print(guest1.phoneNumber)
+    def __init__(self, name, DOB, phoneNumber, vip):
+        super().__init__(name, DOB, phoneNumber)
+        self.vip = vip
