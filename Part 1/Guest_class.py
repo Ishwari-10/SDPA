@@ -5,7 +5,7 @@ class Guest:
     """
 
     # global incrementor
-    GuestUniqueID_counter = 0
+GuestUniqueID_counter = 0
     
     #guestPresent = set()
     def __init__ (self ,name , DOB , phoneNumber  ):
